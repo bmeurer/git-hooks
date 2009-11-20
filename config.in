@@ -1,0 +1,2 @@
+[hooks]
+	basedir = @PREFIX@/share/git-generic-hooks

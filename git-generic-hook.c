@@ -1,5 +1,7 @@
-/**
- * TODO
+/*-
+ * Generic Git hook program, which runs hooks from <basedir>/<hookname>.d/, where <basedir> is queried from the
+ * hooks.basedir property of the repository and <hookname> is the name of the hook (i.e. post-update). You need
+ * to either symlink or hardlink the resulting binary to all hooknames that you want to handle this way.
  *
  * Copyright (c) 2009 Benedikt Meurer <benedikt.meurer@googlemail.com>
  */

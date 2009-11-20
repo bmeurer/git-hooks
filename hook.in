@@ -1,0 +1,16 @@
+#!/bin/bash
+#
+# An example @HOOK@ script, which runs all hooks in
+#
+#   <basedir>/@HOOK@.d/
+#
+# using the
+#
+#   @PREFIX@/bin/git-generic-hook,
+#
+# where <basedir> is the hooks.basedir property set for this repository.
+#
+# Copyright (c) 2009 Benedikt Meurer <benedikt.meurer@googlemail.com>
+#
+
+exec -a "@HOOK@" "@PREFIX@/bin/git-generic-hook" "$@"

@@ -1,0 +1,13 @@
+git-generic-hook
+config
+applypatch-msg
+commit-msg
+post-commit
+post-receive
+post-update
+pre-applypatch
+pre-commit
+pre-rebase
+prepare-commit-msg
+update
+
