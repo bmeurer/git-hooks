@@ -1,0 +1,81 @@
+#!/bin/bash
+#
+# "update" hook script to verify that the user info is valid.
+#
+# Copyright (c) 2009 Benedikt Meurer <benedikt.meurer@googlemail.com>
+#
+# This program is free software; you can redistribute it and/or
+# modify it under the terms of the GNU General Public License as
+# published by the Free Software Foundation; either version 2 of
+# the License, or (at your option) any later version.
+#
+# Config
+# ------
+# hooks.allowinvaliduser
+#   This boolean sets whether to allow commits with invalid user.name or
+#   user.email to enter the repository. By default they won't.
+#
+
+# --- Command line
+refname="$1"
+oldrev="$2"
+newrev="$3"
+
+# --- Safety check
+if [ -z "$GIT_DIR" ]; then
+	echo "Don't run this script from the command line." >&2
+	echo " (if you want, you could supply GIT_DIR then run" >&2
+	echo "  $0 <ref> <oldrev> <newrev>)" >&2
+	exit 1
+fi
+
+if [ -z "$refname" -o -z "$oldrev" -o -z "$newrev" ]; then
+	echo "Usage: $0 <ref> <oldrev> <newrev>" >&2
+	exit 1
+fi
+
+# --- Config
+allowinvaliduser=$(git config --bool hooks.allowinvaliduser)
+
+# --- Verify the user for this commit
+# if $newrev is 0000...0000, it's a commit to delete a ref.
+zero="0000000000000000000000000000000000000000"
+if [ "$allowinvaliduser" != "true" ] \
+&& [ "${refname:0:10}" != "refs/tags/" ] \
+&& [ "$newrev" != "$zero" ]; then
+	if [ "$oldrev" = "$zero" ]; then
+		revs=`git rev-list "$newrev"`
+	else
+		revs=`git rev-list "$oldrev..$newrev"`
+	fi
+	for rev in $revs; do
+		[ "$rev" != "$zero" ] || continue;
+		if git rev-parse "$rev^" &>/dev/null; then
+			name=`git log --pretty=format:%an "$rev^..$rev"`
+			email=`git log --pretty=format:%ae "$rev^..$rev"`
+		else
+			name=`git log --pretty=format:%an "$rev"`
+			email=`git log --pretty=format:%ae "$rev"`
+		fi
+
+		if [ -z "$name" ]; then
+			echo "*** Please set user.name in your git config to something sane." >&2
+			exit 1
+		fi
+
+		if ! echo "$email" | grep -E -q '[^@]+@[^@]+\.[^@]{2,}'; then
+			echo "*** Invalid email address $email." >&2
+			echo "*** Please set user.email in your git config." >&2
+			exit 1
+		fi
+
+		if echo "$email" | grep -E -q '\(none\)|localhost|localdomain|\.local$'; then
+			echo "*** Invalid email address $email." >&2
+			echo "*** Please set user.email in your git config." >&2
+			exit 1
+		fi
+	done
+fi
+
+# --- Finished
+exit 0

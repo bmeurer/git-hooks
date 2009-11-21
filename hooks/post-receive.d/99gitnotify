@@ -10,6 +10,24 @@
 # published by the Free Software Foundation; either version 2 of
 # the License, or (at your option) any later version.
 #
+# Config
+# ------
+# cgit.baseurl
+#   The base URL of the cgit web interface (i.e. http://host.domain/cgit/).
+# notify.mailinglist
+#   The mailinglist to which commit notifications should be sent. If unset,
+#   this hook script won't generate any commit notification emails for the
+#   repository. This is unset by default.
+# notify.emailprefix
+#   The prefix to add to the subject of each commit notification. By default
+#   no special email subject prefix will be used.
+# notify.include
+#   The branches for which to generate commit notification emails. If unset,
+#   commit notification emails will be generated for all branches (except
+#   the ones specified in notify.exclude).
+# notify.exclude
+#   The branches for which no commit notification emails should be generated.
+#
 
 use Cwd 'realpath';
 use Encode 'encode';

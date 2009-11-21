@@ -1,0 +1,17 @@
+#ifndef __CONFIG_H__
+#define __CONFIG_H__
+
+/* check for certain header files */
+#cmakedefine HAVE_CTYPE_H
+#cmakedefine HAVE_DIRENT_H
+#cmakedefine HAVE_ERRNO_H
+#cmakedefine HAVE_SIGNAL_H
+#cmakedefine HAVE_STDARG_H
+#cmakedefine HAVE_STDIO_H
+#cmakedefine HAVE_STDLIB_H
+#cmakedefine HAVE_STRING_H
+#cmakedefine HAVE_SYS_TYPES_H
+#cmakedefine HAVE_SYS_WAIT_H
+#cmakedefine HAVE_UNISTD_H
+
+#endif /* !__CONFIG_H__ */

@@ -1,7 +1,14 @@
-#!/bin/sh
+#!/bin/bash
 #
-# "post-update" hook script to prepare a packed repository for use over
-# dump transports (i.e. http).
+# An example @HOOK@ script, which runs all hooks in
+#
+#   @CMAKE_INSTALL_PREFIX@/share/git-hooks/@HOOK@.d/
+#
+# using the
+#
+#   @CMAKE_INSTALL_PREFIX@/bin/git-run-hooks
+#
+# program.
 #
 # Copyright (c) 2009 Benedikt Meurer <benedikt.meurer@googlemail.com>
 #
@@ -11,4 +18,4 @@
 # the License, or (at your option) any later version.
 #
 
-exec git-update-server-info
+exec "@CMAKE_INSTALL_PREFIX@/bin/git-run-hooks" -b "@CMAKE_INSTALL_PREFIX@/share/git-hooks/@HOOK@.d" -- "$@"

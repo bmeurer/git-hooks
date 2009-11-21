@@ -1,0 +1,24 @@
+## cgit webinterface
+# Uncomment the following lines to enable inclusion of cgit URLs in
+# commit notification emails (see the post-receive.d/99gitnotify hook
+# for details).
+#[cgit]
+#	baseurl = http://host.domain/cgit/
+
+## commit notifications
+# Uncomment the following lines to enable commit notification emails
+# (see the post-receive.d/99gitnotify hook for details).
+#[notify]
+#	mailinglist = scm-commits@host.domain
+
+## general hooks
+# Uncomment the following lines to control the behavior of several
+# other hooks.
+#[hooks]
+#	allowinvaliduser=false
+#	allowunannotated=false
+#	allowdeletetag=false
+#	allowmodifytag=false
+#	allowdeletebranch=false
+#	denycreatebranch=false
+#	updateserverinfo=false

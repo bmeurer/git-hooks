@@ -1,0 +1,35 @@
+#!/bin/bash
+#
+# "post-update" hook script to prepare a packed repository for use over
+# dump transports (i.e. http).
+#
+# Copyright (c) 2009 Benedikt Meurer <benedikt.meurer@googlemail.com>
+#
+# This program is free software; you can redistribute it and/or
+# modify it under the terms of the GNU General Public License as
+# published by the Free Software Foundation; either version 2 of
+# the License, or (at your option) any later version.
+#
+# Config
+# ------
+# hooks.updateserverinfo
+#   Run git-update-server-info to prepare a packed repository for use
+#   over dump transports (i.e. http).
+#
+
+# --- Safety check
+if [ -z "$GIT_DIR" ]; then
+	echo "Don't run this script from the command line." >&2
+	exit 1
+fi
+
+# --- Config
+updateserverinfo=$(git config --bool hooks.updateserverinfo)
+
+# --- Update server info if requested
+if [ x"$updateserverinfo" = x"true" ]; then
+	exec git update-server-info
+fi
+
+# --- Finished
+exit 0
