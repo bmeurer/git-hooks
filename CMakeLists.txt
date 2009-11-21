@@ -44,5 +44,9 @@ add_executable(git-run-hooks git-run-hooks.c)
 install(TARGETS git-run-hooks
 	DESTINATION bin)
 
+# install documentation
+install(FILES "README"
+	DESTINATION "share/doc/git-hooks")
+
 add_subdirectory(hooks)
 add_subdirectory(template)
