@@ -25,6 +25,7 @@ install: all
 	done
 	install -d -m 0755 $(PREFIX)/share/git-generic-hooks/templates/info
 	install -c -m 0644 exclude $(PREFIX)/share/git-generic-hooks/templates/info/exclude
+	install -c -m 0755 post-receive.d/99gitnotify $(PREFIX)/share/git-generic-hooks/post-receive.d/99gitnotify
 
 git-generic-hook: git-generic-hook.c
 	$(CC) $(CFLAGS) -o $@ $<
