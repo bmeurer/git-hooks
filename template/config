@@ -21,4 +21,4 @@
 #	allowmodifytag=false
 #	allowdeletebranch=false
 #	denycreatebranch=false
-#	updateserverinfo=false
+#	updateserverinfo=true
