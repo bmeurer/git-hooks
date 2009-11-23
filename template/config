@@ -5,6 +5,13 @@
 #[cgit]
 #	baseurl = http://host.domain/cgit/
 
+## gitweb web interface
+# Uncomment the following lines to enable inclusion of gitweb URLs in
+# commit notification emails (see the post-receive.d/99gitnotify hook
+# for details).
+#[gitweb]
+#	baseurl = http://host.domain/git
+
 ## commit notifications
 # Uncomment the following lines to enable commit notification emails
 # (see the post-receive.d/99gitnotify hook for details).

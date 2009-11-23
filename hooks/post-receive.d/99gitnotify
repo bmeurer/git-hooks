@@ -14,6 +14,8 @@
 # ------
 # cgit.baseurl
 #   The base URL of the cgit web interface (i.e. http://host.domain/cgit/).
+# gitweb.baseurl
+#   The base URL of the gitweb web interface (i.e. http://host.domain/git).
 # notify.mailinglist
 #   The mailinglist to which commit notifications should be sent. If unset,
 #   this hook script won't generate any commit notification emails for the
@@ -56,6 +58,9 @@ my $sendmail = '/usr/sbin/sendmail';
 
 # cgit base URL
 my $cgit_baseurl = git_config("cgit.baseurl");
+
+# gitweb base URL
+my $gitweb_baseurl = git_config("gitweb.baseurl");
 
 # default repository name
 my $notify_repository = git_repository();
@@ -206,6 +211,13 @@ sub git_send_notice($$)
 			. "$cgit_baseurl/$notify_repository/tag/?id="
 			. "$object";
 		}
+		if ($gitweb_baseurl)
+		{
+			push @notice,
+			"URL:    "
+			. "$gitweb_baseurl/$notify_repository/?a=tag;"
+			. "h=$object";
+		}
 		push @notice,
 		"Tagger: " .
 		$info{'tagger'},
@@ -230,6 +242,13 @@ sub git_send_notice($$)
 			"URL:    "
 			. "$cgit_baseurl/$notify_repository/commit/?id="
 			. "$object";
+		}
+		if ($gitweb_baseurl)
+		{
+			push @notice,
+			"URL:    "
+			. "$gitweb_baseurl/$notify_repository/?a=commit;"
+			. "h=$object";
 		}
 		push @notice,
 		"Author: " . $info{'author'},
