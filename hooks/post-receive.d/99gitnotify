@@ -215,8 +215,8 @@ sub git_send_notice($$)
 		{
 			push @notice,
 			"URL:    "
-			. "$gitweb_baseurl/$notify_repository/?a=tag;"
-			. "h=$object;p=$notify_repository.git";
+			. "$gitweb_baseurl/?p=$notify_repository.git;a=tag;"
+			. "h=$object";
 		}
 		push @notice,
 		"Tagger: " .
@@ -247,8 +247,8 @@ sub git_send_notice($$)
 		{
 			push @notice,
 			"URL:    "
-			. "$gitweb_baseurl/$notify_repository/?a=commit;"
-			. "h=$object;p=$notify_repository.git";
+			. "$gitweb_baseurl/?p=$notify_repository.git;a=commit;"
+			. "h=$object";
 		}
 		push @notice,
 		"Author: " . $info{'author'},
