@@ -1,6 +1,10 @@
 
                       git-hooks - Generic Git hooks
 
+
+                    http://benediktmeurer.de/git-hooks
+
+
 Git Hooks provides a simple mechanism to manage hooks for several Git
 repositories in a unified and simple way. It allows you to install hook
 scripts in a central location and use them for your Git repositories.
